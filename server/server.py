@@ -17,6 +17,9 @@ class JsonServer(object):
         self.sock = socket
         self.address = address
 
+    def onmessage(self, json_data):
+        print json_data
+
     def __call__(self):
         recv_data = '' # received data
         while 1:
