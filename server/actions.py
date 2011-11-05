@@ -58,7 +58,7 @@ def auth(connection, email, password=None, token=None):
         user.update_token()
         params = {'result': 'Ok', 'token': user.token}
         connection.response({'cmd': 'auth', 'params': params})
-        connection.user = user
+        connection.authenticate(user)
     else:
         params = {'result': 'Fail', 'errormsg': 'Authentication failed'}
         connection.response({'cmd': 'auth', 'params': params})

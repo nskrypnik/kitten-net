@@ -1,4 +1,5 @@
 import json
+from db import db_conn
 
 class Connection(object):
     '''
