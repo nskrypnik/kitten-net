@@ -14,7 +14,7 @@ class UsersTest(unittest.TestCase):
     def test_load_user(self):
         user = User.load("niko@gmail.com")
         self.assertEqual(user.email, "niko@gmail.com")
-        print user.password
+        print user.id
 
 if __name__ == "__main__":
     unittest.main()

@@ -23,4 +23,8 @@ def register(connection, **params):
     email = params['email']
     password = params['password']
     user = User.create_new(email, password)
+    user.save()
+    params = {'result': 'Ok', 'token': user.token}
+    response_msg = {'cmd': 'register', 'params': params}
+    connection.response(response_msg)
     

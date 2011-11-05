@@ -1,6 +1,7 @@
 
 from db import db_conn
 import hashlib
+from datetime import datetime
 import json
 
 USER_INDEX_ID = "user_id_index"
@@ -10,8 +11,9 @@ class User(object):
         self.id = kwargs.get('id')
         self.email = kwargs.get('email')
         raw_password = kwargs.get('password')
-        md5 = hashlib.md5
-        self.password = md5.hexdigest(raw_password)
+        md5 = hashlib.md5(raw_password)
+        self.password = md5.hexdigest()
+        self.update_token()
 
     @classmethod
     def create_new(cls, email, password):
@@ -33,4 +35,8 @@ class User(object):
     def save(self):
         serialized = {'email': self.email, 'password': self.password, 'id': self.id}
         db_conn.set(self.user_key, json.dumps(serialized))
+
+    def update_token(self):
+        token_hash = hashlib.md5("".join([self.email, str(datetime.now)]))
+        self.token = token_hash.hexdigest()
 
