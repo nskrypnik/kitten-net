@@ -14,9 +14,9 @@ try:
 except Exception as e:
     raise e
 
-msg = {'hello': 'world'}
+msg = {'cmd': 'echo', 'params': {'msg': 'hello world!'}}
 
 s.send(json.dumps(msg))
 
-while 1:
-    pass
+data = s.recv(1024)
+print data

@@ -1,8 +1,12 @@
 #!/usr/bin/env python
 
+from connection import Connection
+from commands import handle_request
+
 from gevent.server import StreamServer
 from config import HOST,PORT
 from gevent import monkey; monkey.patch_all()
+
 import json
 
 
@@ -14,16 +18,16 @@ class SocketDisconnectedError(Exception):
 class JsonServer(object):
 
     def __init__(self, socket, address):
-        self.sock = socket
         self.address = address
+        self.sock = socket
+        self.connection = Connection(socket)
 
     def onmessage(self, json_data):
-        print json_data
+        handle_request(json_data, self.connection)
 
     def __call__(self):
         recv_data = '' # received data
         while 1:
-            
             #try to read some data block from 
             recv_data += self.sock.recv(CHUNK_BLOCK_SIZE)
             if recv_data == '':
@@ -42,17 +46,6 @@ class JsonServer(object):
             except SocketDisconnectedError:
                 # End agian connection is lost
                 return
-    
-    def response(self, data_to_send):
-        " This function sends response to the client through socket connection "
-        if type(data_to_send) == str:
-            self.sock.send(data_to_send)
-        elif type(data_to_send) == dict or type(data_to_send) == list:
-            self.sock.send(json.dumps(data_to_send))
-        else:
-            raise ValueError('Wrong type of sent data')
-
-
 
 def routine(socket, address):
     JsonServer(socket, address)()
