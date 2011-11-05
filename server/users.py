@@ -17,16 +17,25 @@ class User(object):
 
     @classmethod
     def create_new(cls, email, password):
-        new_user_id = db_conn.incr(USER_INDEX_ID)
-        new_user = cls(email=email, password=password, id=new_user_id)
-        new_user.save()
-        return new_user
+        
+        user = User.load(email=email)
+        if user:
+            return user
+        else:
+            new_user_id = db_conn.incr(USER_INDEX_ID)
+	    new_user = cls(email=email, password=password, id=new_user_id)
+	    new_user.save()
+	    return new_user
 
     @classmethod
     def load(cls, email):
         user_key = "kitten:users:%s" % email
-        user_serialized = json.loads(db_conn.get(user_key))
-        return cls(**user_serialized)
+        user_db_string = db_conn.get(user_key)
+	if user_db_string:
+            user_serialized = json.loads(user_db_string)
+	    return cls(**user_serialized)
+        else:
+            return None
 
     @property
     def user_key(self):
