@@ -21,6 +21,7 @@ class JsonServer(object):
         self.address = address
         self.sock = socket
         self.connection = Connection(socket)
+        print "Kitten has been borned"
 
     def onmessage(self, json_data):
         handle_request(json_data, self.connection)

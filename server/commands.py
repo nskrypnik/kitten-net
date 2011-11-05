@@ -3,7 +3,7 @@
 import sys
 import hashlib
 
-from usres import User
+from users import User
 
 this_module = sys.modules[__name__]
 
