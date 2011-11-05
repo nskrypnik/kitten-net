@@ -7,6 +7,15 @@ from users import User
 
 this_module = sys.modules[__name__]
 
+def auth_required(func):
+    def gen(connection, **kwargs):
+        if connection.authenticated:
+            func(connection, **kwargs)
+        else:
+            params = {'result': 'Fail', 'errormsg': 'Authentication required'}
+            connection.response({'cmd': func.__name__, 'params': params})
+    return gen
+
 def handle_request(json_req, connection):
     ''' 
         This functions calls all functions form `cmd` parameter of json request
@@ -21,7 +30,8 @@ def handle_request(json_req, connection):
 
 def echo(connection, msg):
     print "Kitten said: %s" % msg
-    connection.response(msg)
+    params = {'msg': msg}
+    connection.response({'cmd': 'echo', 'params': params})
 
 def register(connection, **params):
     email = params['email']
@@ -48,11 +58,11 @@ def auth(connection, email, password=None, token=None):
         user.update_token()
         params = {'result': 'Ok', 'token': user.token}
         connection.response({'cmd': 'auth', 'params': params})
+        connection.user = user
     else:
         params = {'result': 'Fail', 'errormsg': 'Authentication failed'}
         connection.response({'cmd': 'auth', 'params': params})
 
 
-    
 
 

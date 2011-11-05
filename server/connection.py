@@ -1,3 +1,4 @@
+import json
 
 class Connection(object):
     '''
@@ -6,6 +7,12 @@ class Connection(object):
 
     def __init__(self, sock):
         self.sock = sock
+        self.user = None
 
     def response(self, msg):
-        self.sock.send(msg)
+        self.sock.send(json.dumps(msg))
+
+    @property
+    def authenticated(self):
+        if self.user: return True
+        return False
