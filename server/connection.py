@@ -17,3 +17,6 @@ class Connection(object):
     def authenticated(self):
         if self.user: return True
         return False
+
+    def authenticate(self, user):
+        self.user = user

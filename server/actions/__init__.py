@@ -1,7 +1,9 @@
+
 #Here is the commands of our system
 
 import sys
 import hashlib
+from searchlib import register_search_request
 
 from users import User
 
@@ -63,6 +65,6 @@ def auth(connection, email, password=None, token=None):
         params = {'result': 'Fail', 'errormsg': 'Authentication failed'}
         connection.response({'cmd': 'auth', 'params': params})
 
-
-
-
+@auth_required
+def search(connection, need):
+    register_search_request(connection, need)

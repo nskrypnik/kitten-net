@@ -10,29 +10,31 @@ class User(object):
         self.id = kwargs.get('id')
         self.email = kwargs.get('email')
         raw_password = kwargs.get('password')
-        md5 = hashlib.md5(raw_password)
-        self.password = md5.hexdigest()
+        if kwargs.get('create_new'):
+            password_hash = hashlib.md5(raw_password)
+            self.password = password_hash.hexdigest()
+        else:
+            self.password = raw_password
         self.update_token()
 
     @classmethod
     def create_new(cls, email, password):
-        
         user = User.load(email=email)
         if user:
             return user
         else:
             new_user_id = db_conn.incr(USER_INDEX_ID)
-	    new_user = cls(email=email, password=password, id=new_user_id)
-	    new_user.save()
-	    return new_user
+            new_user = cls(email=email, password=password, id=new_user_id, create_new=True)
+            new_user.save()
+            return new_user
 
     @classmethod
     def load(cls, email):
         user_key = "kitten:users:%s" % email
         user_db_string = db_conn.get(user_key)
-	if user_db_string:
+        if user_db_string:
             user_serialized = json.loads(user_db_string)
-	    return cls(**user_serialized)
+            return cls(**user_serialized)
         else:
             return None
 
