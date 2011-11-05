@@ -1,7 +1,10 @@
 #Here is the commands of our system
 
 import sys
-from usres import User
+import hashlib
+
+from users import User
+
 this_module = sys.modules[__name__]
 
 def handle_request(json_req, connection):
@@ -17,6 +20,7 @@ def handle_request(json_req, connection):
     _callable(connection, **params)
 
 def echo(connection, msg):
+    print "Kitten said: %s" % msg
     connection.response(msg)
 
 def register(connection, **params):
@@ -27,4 +31,28 @@ def register(connection, **params):
     params = {'result': 'Ok', 'token': user.token}
     response_msg = {'cmd': 'register', 'params': params}
     connection.response(response_msg)
+
+def auth(connection, email, password=None, token=None):
+    user = User.load(email)
+    if not user:
+        params = {'result': 'Fail', 'errormsg': 'No such user'}
+        connection.response({'cmd': 'auth', 'params': params})
+        return
+    auth_succesful = False
+    if token and token == user.token:
+            auth_succesful = True
+    if password and hashlib.md5(password).hexdigest() == user.password:
+        auth_succesful = True
     
+    if auth_succesful:
+        user.update_token()
+        params = {'result': 'Ok', 'token': user.token}
+        connection.response({'cmd': 'auth', 'params': params})
+    else:
+        params = {'result': 'Fail', 'errormsg': 'Authentication failed'}
+        connection.response({'cmd': 'auth', 'params': params})
+
+
+    
+
+
