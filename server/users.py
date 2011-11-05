@@ -26,10 +26,16 @@ class User(object):
             new_user_id = db_conn.incr(USER_INDEX_ID)
             new_user = cls(email=email, password=password, id=new_user_id, create_new=True)
             new_user.save()
+            db_conn.set("kitten:user_by_id:%i" % new_user_id, new_user.email)
             return new_user
 
     @classmethod
-    def load(cls, email):
+    def load(cls, email_or_id):
+        try:
+            user_id = int(email_or_id)
+            email = db_conn.get("kitten:user_by_id:%i" % user_id)
+        except ValueError:
+            email = email_or_id
         user_key = "kitten:users:%s" % email
         user_db_string = db_conn.get(user_key)
         if user_db_string:
