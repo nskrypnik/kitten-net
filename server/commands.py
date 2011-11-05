@@ -1,6 +1,7 @@
 #Here is the commands of our system
 
 import sys
+from usres import User
 this_module = sys.modules[__name__]
 
 def handle_request(json_req, connection):
@@ -18,4 +19,8 @@ def handle_request(json_req, connection):
 def echo(connection, msg):
     connection.response(msg)
 
-
+def register(connection, **params):
+    email = params['email']
+    password = params['password']
+    user = User.create_new(email, password)
+    

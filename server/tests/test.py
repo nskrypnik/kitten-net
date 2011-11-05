@@ -9,7 +9,7 @@ sys.path.append('..')
 from config import PORT
 
 try:
-    s = socket.create_connection(('localhost', PORT))
+    s = socket.create_connection(('46.19.34.217', PORT))
     print 'It seeems to be ok'
 except Exception as e:
     raise e
