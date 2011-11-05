@@ -26,8 +26,9 @@ class JsonServer(object):
             
             #try to read some data block from 
             recv_data += self.sock.recv(CHUNK_BLOCK_SIZE)
-            if recv_data == None:
+            if recv_data == '':
                 #TODO exit from routine, client is disconnected
+                print "Kitten is dead"
                 return
             try:
                 # Try to loads gotten data into json
