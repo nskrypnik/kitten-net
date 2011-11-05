@@ -6,7 +6,6 @@ import json
 USER_INDEX_ID = "user_id_index"
 
 class User(object):
-
     def __init__(self, **kwargs):
         self.id = kwargs.get('id')
         self.email = kwargs.get('email')
