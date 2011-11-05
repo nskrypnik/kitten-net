@@ -15,7 +15,6 @@ def handle_request(json_req, response):
     _callable = getattr(this_module, command_name, None)
     _callable(response, **params)
 
-def ping(response, params):
-
-    pass
+def ping(response, msg):
+    response(msg)
 
