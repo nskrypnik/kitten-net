@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from connection import Connection
-from commands import handle_request
+from actions import handle_request
 
 from gevent.server import StreamServer
 from config import HOST,PORT
