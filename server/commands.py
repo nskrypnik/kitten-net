@@ -20,6 +20,7 @@ def handle_request(json_req, connection):
     _callable(connection, **params)
 
 def echo(connection, msg):
+    print "Kitten said: %s" % msg
     connection.response(msg)
 
 def register(connection, **params):
