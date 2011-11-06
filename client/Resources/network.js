@@ -12,12 +12,12 @@ Net.connect = function (address, port) {
 	var receivingFunction = this._receive;
 	var context = this
 	this.socket.onRead(function (data) {
-		// console.log("[Net] connect callbacks", this.receiveCallbacks);
+		console.log("[Net] connect callbacks", context.receiveCallbacks);
 		receivingFunction.apply(context, [JSON.parse(data.toString())]);
 	});
 
 	this.socket.onError(function (e) {
-		console.log("[Net] error:", e)
+		console.warn("[Net] error:", e)
 	})
 }
 
@@ -34,7 +34,7 @@ Net._receive = function (dataObj) {
 	var receiveCallbacks = this.receiveCallbacks;
 	for (cmd in receiveCallbacks) {
 		if (cmd == dataObj.cmd) {
-			// console.log("[Net] calling handler of", dataObj.cmd)
+			console.log("[Net] calling handler of", dataObj.cmd)
 			receiveCallbacks[cmd](dataObj);
 		}
 	}

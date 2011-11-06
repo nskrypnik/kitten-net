@@ -3,14 +3,19 @@
       <script src="network.js"></script>
       <script src="index.js"></script>
       <script type="text/javascript">
-		window.addEventListener("load", main, false);
+		// window.addEventListener("load", main, false);
+		// document.addEventListener("DOMContentLoaded", main, false);
+		if ( document.addEventListener ) {
+        // Use the handy event callback
+        document.addEventListener( "DOMContentLoaded", function(){
+            document.removeEventListener( "DOMContentLoaded", arguments.callee, false );
+            main();
+        }, false );
+		}
       </script>
 	</head>
-	<body style="background-color:#1c1c1c;margin:0">
-		<div style="border-top:1px solid #404040">
-			<div style="color:#fff;;padding:10px">
-				Welcome to kitten
-			</div>
-		</div>
+	<body style="margin:0">
+      <div id="log">
+      </div>
 	</body>
 </html>
