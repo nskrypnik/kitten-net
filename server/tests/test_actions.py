@@ -37,7 +37,7 @@ class CommandsTest(unittest.TestCase):
     def test_search(self):
         actions.register(connection, email='bogdan1@mail.ua', password='bogdan19861')
         actions.auth(connection, "bogdan1@mail.ua", password='bogdan19861', token=None)
-        
+
         dumb_socket2 = DumbSocket()
         connection2 = Connection(dumb_socket2)
         actions.register(connection2, email='bogdan@mail.ua', password='bogdan1986')
@@ -48,7 +48,7 @@ class CommandsTest(unittest.TestCase):
         actions.register(connection3, email='bogdan2@mail.ua', password='bogdan21986')
         actions.auth(connection2, "bogdan2@mail.ua", password='bogdan21986', token=None)
 
-        
+
         actions.add_friend(connection, email="bogdan@mail.ua")
         actions.add_friend(connection, email="bogdan2@mail.ua")
 

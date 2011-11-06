@@ -3,6 +3,8 @@ from searchlib import KITTEN_SEARCH_JOBS, check_search_job
 from db import db_conn
 from gevent.queue import Queue
 import gevent
+from gevent import monkey; monkey.patch_all()
+
 
 class Connection(object):
     '''

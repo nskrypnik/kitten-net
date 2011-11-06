@@ -71,9 +71,6 @@ def send_search_request(users, sequence, search_request):
 
 def check_search_job(connection, job_queue):
     while 1:
-        print "=========== i'm here ============"
         search_request, sequence = job_queue.get()
-        print 'I\'m unlocked'
         params = {'need': search_request.need, 'request_id': search_request.id, 'sequence': sequence}
         connection.response({'cmd': 'find', 'params': params})
-

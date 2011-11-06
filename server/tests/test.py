@@ -3,6 +3,7 @@
 import socket
 import sys
 import json
+import time
 
 sys.path.append('..')
 
@@ -15,9 +16,16 @@ try:
 except Exception as e:
     raise e
 
-msg = {'cmd': 'echo', 'params': {'msg': 'hello world!'}}
+def send_msg(msg):
+    s.send(json.dumps(msg))
+    data = s.recv(1024)
+    print data
 
-s.send(json.dumps(msg))
 
-data = s.recv(1024)
-print data
+send_msg({'cmd': 'echo', 'params': {'msg': 'hello world!'}})
+send_msg({'cmd': 'register', 'params': {'email': 'bogdan1@mail.com', 'password': 'bogdan19861'}})
+send_msg({'cmd': 'auth', 'params': {'email': 'bogdan1@mail.com', 'password': 'bogdan19861'}})
+time.sleep(1)
+
+
+
