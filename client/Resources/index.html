@@ -1,21 +1,285 @@
 <html>
 	<head>
-      <script src="network.js"></script>
-      <script src="index.js"></script>
-      <script type="text/javascript">
-		// window.addEventListener("load", main, false);
-		// document.addEventListener("DOMContentLoaded", main, false);
-		if ( document.addEventListener ) {
-        // Use the handy event callback
-        document.addEventListener( "DOMContentLoaded", function(){
-            document.removeEventListener( "DOMContentLoaded", arguments.callee, false );
-            main();
-        }, false );
-		}
-      </script>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<link rel="stylesheet" href="style.css" />
+		<script src="network.js"></script>
+		<script src="index.js"></script>
+		<script type="text/javascript">
+		  if ( document.addEventListener ) {
+          // Use the handy event callback
+          document.addEventListener( "DOMContentLoaded", function(){
+          document.removeEventListener( "DOMContentLoaded", arguments.callee, false );
+          main();
+          }, false );
+		  }
+		</script>
+		<script type="text/javascript" src="jquery-1.7.min.js"></script>
 	</head>
-	<body style="margin:0">
+	<body>
       <div id="log">
       </div>
+		<div class="header">
+			<ul class="tabs">
+				<li id="items" class="selected">Мои вещи</li>
+				<li id="friends" class="">Мои друзья</li>
+				<li id="search" class="">Поиск</li>
+				<li id="settings" class="">Настройки</li>
+			</ul>
+		</div>
+		<div class="content">
+			<div class="main items">
+				<div class="item">
+					<div class="image">
+						<img src="http://ompldr.org/tYjVmbw"/>
+					</div>
+					<span class="title">
+						Название продукта $5.00
+					</span>
+					<div class="description">
+						Описание товара бла бла бла.
+					</div>
+				</div>
+				<div class="clear"></div>
+				<div class="item">
+					<div class="image">
+						<img src="http://ompldr.org/tYjVmbw"/>
+					</div>
+					<span class="title">
+						Название продукта $5.00
+					</span>
+					<div class="description">
+						Описание товара бла бла бла.
+					</div>
+				</div>
+				<div class="clear"></div>
+				<div class="item">
+					<div class="image">
+						<img src="http://ompldr.org/tYjVmbw"/>
+					</div>
+					<span class="title">
+						Название продукта $5.00
+					</span>
+					<div class="description">
+						Описание товара бла бла бла.
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="main friends">
+				<div class="item">
+					<div class="image">
+						<img src="http://ompldr.org/tYjVmbw"/>
+					</div>
+					<span class="title">
+						Вася Пупкин
+					</span>
+					<div class="contacts">
+						Контакти контакти контакти контакти контакти контакти
+					</div>
+				</div>
+				<div class="clear"></div>
+				<div class="item">
+					<div class="image">
+						<img src="http://ompldr.org/tYjVmbw"/>
+					</div>
+					<span class="title">
+						Вася Пупкин
+					</span>
+					<div class="contacts">
+						Контакти контакти контакти контакти контакти контакти
+					</div>
+				</div>
+				<div class="clear"></div>
+				<div class="item">
+					<div class="image">
+						<img src="http://ompldr.org/tYjVmbw"/>
+					</div>
+					<span class="title">
+						Вася Пупкин
+					</span>
+					<div class="contacts">
+						Контакти контакти контакти контакти контакти контакти
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="main search">
+				<form class="searchform">
+					<p>
+						<input class="textinput" type="text" value=""/>
+					</p>
+				</form>
+				<h3>Друзья</h3>
+				<div class="searchitems">
+					<div class="searchitem">
+						<div class="image">
+							<img src="http://ompldr.org/tYjVmbw"/>
+						</div>
+						<span class="title">
+							Название продукта $5.00
+						</span>
+						<div class="description">
+							Описание товара бла бла бла.
+						</div>
+					</div>
+					<div class="clear"></div>
+					<div class="searchitem">
+						<div class="image">
+							<img src="http://ompldr.org/tYjVmbw"/>
+						</div>
+						<span class="title">
+							Название продукта $5.00
+						</span>
+						<div class="description">
+							Описание товара бла бла бла.
+						</div>
+					</div>
+					<div class="clear"></div>
+					<div class="searchitem">
+						<div class="image">
+							<img src="http://ompldr.org/tYjVmbw"/>
+						</div>
+						<span class="title">
+							Название продукта $5.00
+						</span>
+						<div class="description">
+							Описание товара бла бла бла.
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<h3>Друзья друзей</h3>
+				<div class="searchitems">
+					<div class="searchitem">
+						<div class="image">
+							<img src="http://ompldr.org/tYjVmbw"/>
+						</div>
+						<span class="title">
+							Название продукта $5.00
+						</span>
+						<div class="description">
+							Описание товара бла бла бла.
+						</div>
+					</div>
+					<div class="clear"></div>
+					<div class="searchitem">
+						<div class="image">
+							<img src="http://ompldr.org/tYjVmbw"/>
+						</div>
+						<span class="title">
+							Название продукта $5.00
+						</span>
+						<div class="description">
+							Описание товара бла бла бла.
+						</div>
+					</div>
+					<div class="clear"></div>
+					<div class="searchitem">
+						<div class="image">
+							<img src="http://ompldr.org/tYjVmbw"/>
+						</div>
+						<span class="title">
+							Название продукта $5.00
+						</span>
+						<div class="description">
+							Описание товара бла бла бла.
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<h3>В вашем городе</h3>
+				<div class="searchitems">
+					<div class="searchitem">
+						<div class="image">
+							<img src="http://ompldr.org/tYjVmbw"/>
+						</div>
+						<span class="title">
+							Название продукта $5.00
+						</span>
+						<div class="description">
+							Описание товара бла бла бла.
+						</div>
+					</div>
+					<div class="clear"></div>
+					<div class="searchitem">
+						<div class="image">
+							<img src="http://ompldr.org/tYjVmbw"/>
+						</div>
+						<span class="title">
+							Название продукта $5.00
+						</span>
+						<div class="description">
+							Описание товара бла бла бла.
+						</div>
+					</div>
+					<div class="clear"></div>
+					<div class="searchitem">
+						<div class="image">
+							<img src="http://ompldr.org/tYjVmbw"/>
+						</div>
+						<span class="title">
+							Название продукта $5.00
+						</span>
+						<div class="description">
+							Описание товара бла бла бла.
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="main settings">
+				<div class="column">
+					<form class="auth">
+						<p>
+							<input class="textinput" type="text" value="" placeholder="E-mail"/>
+						</p>
+						<p>
+							<input class="textinput" type="password" value="" placeholder="Пароль"/>
+						</p>
+						<p>
+							<input class="textinput" type="text" value="" placeholder="Телефон"/>
+						</p>
+						<p>
+							<input class="textinput" type="text" value="" placeholder="Страна"/>
+						</p>
+						<p>
+							<input class="textinput" type="text" value="" placeholder="Город"/>
+						</p>
+					</form>
+				</div>
+				<div class="column">
+					<form class="auth">
+						<p>
+							<input class="textinput" type="text" value="" placeholder="E-mail"/>
+						</p>
+						<p>
+							<input class="textinput" type="password" value="" placeholder="Пароль"/>
+						</p>
+					</form>
+				</div>
+				<div class="clear"></div>
+				<div class="column">
+					<button class="action">Зарегистрироватся</button>
+				</div>
+				<div class="column">
+					<button class="action">Войти</button>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<script type="text/javascript">
+		$(function () {
+			var tabContainers = $('.main');
+			tabContainers.hide().filter(':first').show(); 
+			
+			$('ul.tabs li').click(function () {
+				tabContainers.hide(); 
+				tabContainers.filter('.' + $(this).attr('id')).show();
+				$('ul.tabs li').removeClass('selected'); 
+				$(this).addClass('selected'); 
+				return false;
+			}).filter(':first').click();
+		});
+		</script>
 	</body>
 </html>

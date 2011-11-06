@@ -1,0 +1,167 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.clear {
+	clear: both;
+}
+
+body {
+	background-color:#fff;
+	color:#000;
+	font: 12pt sans-serif;
+}
+
+.header {
+	width: 100%;
+	height: 50px;
+	border-bottom: 1px solid #AAAAAA;
+}
+
+.header ul.tabs li {
+	font-weight: bold;
+	display:block;
+	float:left;
+	width: 25%;
+	height: 50px;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 50px;
+	cursor: pointer;
+}
+
+.header ul.tabs {
+	list-style: none;
+}
+
+.header ul.tabs li.selected {
+	background: #333333;
+	color:#fff;
+}
+
+.header ul.tabs li:hover {
+	background: #555555;
+	color:#fff;
+}
+
+/*.header ul.tabs li:hover, .header ul.tabs li:active {*/
+/*	background: #C0C0C0;*/
+/*}*/
+
+.main {
+	width: 100%;
+}
+
+
+/*Items*/
+.items .item {
+	margin:10px;
+	padding:10px;
+}
+
+.items .image {
+	float:left;
+	padding: 0 20px 0 0; 
+}
+
+.items .item .description {
+	color: #666666;
+	font-size: 10pt;
+}
+
+/*Friends*/
+.friends .item {
+	margin:10px;
+	padding:10px;
+}
+
+.friends .image {
+	float:left;
+	padding: 0 20px 0 0; 
+}
+
+.friends .item .contacts {
+	color: #666666;
+	font-size: 10pt;
+}
+
+/*Settings*/
+.settings .column{
+	width: 50%;
+	float: left;
+	text-align: center;
+}
+
+.settings form.auth{
+	margin: 10px;
+}
+
+.settings form.auth .textinput {
+	border-radius: 10px 10px 10px 10px;
+	border: 1px solid #AAAAAA;
+	font: 12pt sans-serif;
+	padding: 6px;
+	width: 100%;
+}
+
+.settings form.auth p{
+	padding:10px;
+}
+
+.settings .action {
+	border: 1px solid #CF5300;
+	background: none repeat scroll 0 0 #FF6600;
+	border-radius: 10px 10px 10px 10px;
+	box-shadow: 1px 1px 0 #FFFFFF;
+	color: #FFFFFF;
+	font-size: 12pt;
+	font-weight: bold;
+	line-height: 1;
+	padding: 10px 22px;
+	cursor: pointer;
+}
+
+.settings .action:active {
+	position: relative;
+	top: 1px
+}
+
+/*Search*/
+.search form.searchform {
+	margin: 10px;
+}
+
+.search form.searchform p{
+	text-align: center;
+	padding:10px;
+}
+.search form.searchform .textinput {
+	border-radius: 10px 10px 10px 10px;
+	border: 1px solid #AAAAAA;
+	font: 12pt sans-serif;
+	padding: 6px;
+	width: 80%;
+}
+
+.search .searchitem {
+	padding:10px;
+	margin:10px
+}
+
+.search .image {
+	float:left;
+	padding: 0 20px 0 0; 
+}
+
+.search h3 {
+	padding:10px;
+	font-size: 12pt;
+	font-weight: bold;
+	border-bottom: 1px solid #AAAAAA;
+}
+
+.search .searchitems .description {
+	color: #666666;
+	font-size: 10pt;
+}
