@@ -4,6 +4,7 @@
 		<link rel="stylesheet" href="style.css" />
 		<script src="network.js"></script>
 		<script src="index.js"></script>
+		<script type="text/javascript" src="jquery-1.7.min.js"></script>
 		<script type="text/javascript">
 		  if ( document.addEventListener ) {
           // Use the handy event callback
@@ -13,7 +14,6 @@
           }, false );
 		  }
 		</script>
-		<script type="text/javascript" src="jquery-1.7.min.js"></script>
 	</head>
 	<body>
       <div id="log">
@@ -267,19 +267,5 @@
 				<div class="clear"></div>
 			</div>
 		</div>
-		<script type="text/javascript">
-		$(function () {
-			var tabContainers = $('.main');
-			tabContainers.hide().filter(':first').show(); 
-			
-			$('ul.tabs li').click(function () {
-				tabContainers.hide(); 
-				tabContainers.filter('.' + $(this).attr('id')).show();
-				$('ul.tabs li').removeClass('selected'); 
-				$(this).addClass('selected'); 
-				return false;
-			}).filter(':first').click();
-		});
-		</script>
 	</body>
 </html>

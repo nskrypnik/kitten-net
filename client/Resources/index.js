@@ -84,7 +84,35 @@ App.Products.add = function () {
 	
 }
 
+function firstrun() {
+	var $tabs = $('ul.tabs li');
+	$tabs.unbind('click');
+	$tabs.removeClass('selected').filter(':not(#settings)').addClass('disabled');
+	$('#settings').addClass('selected');
+	$('.main').hide().filter('.settings').show();
+}
+
+function authenticaticated() {
+	//Tabs
+	var $containers = $('.main');
+	var $tabs = $('ul.tabs li');
+	
+	$containers.hide().filter(':first').show(); 
+	
+	$('ul.tabs li').click(function () {
+		$containers.hide(); 
+		$containers.filter('.' + $(this).attr('id')).show();
+		$tabs.removeClass('selected'); 
+		$(this).addClass('selected'); 
+		return false;
+	}).filter(':first').click();
+	
+	$tabs.filter(':not(#settings)').removeClass('disabled');
+}
+
 function main() {
+	authenticaticated()
+	
 	Net.connect();
 	$id = document.getElementById;
 	 

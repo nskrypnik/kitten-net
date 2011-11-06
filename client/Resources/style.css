@@ -40,6 +40,11 @@ body {
 	color:#fff;
 }
 
+.header ul.tabs li.disabled, .header ul.tabs li.disabled:hover {
+	background: #CCCCCC;
+	color:#000;
+}
+
 .header ul.tabs li:hover {
 	background: #555555;
 	color:#fff;
