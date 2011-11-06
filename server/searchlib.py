@@ -1,6 +1,7 @@
 # Here is the search request routing facilities
 
 from db import db_conn
+import json
 from gevent.queue import Queue
 
 KITTEN_SEARCH_JOBS = {}
@@ -8,22 +9,55 @@ KITTEN_SEARCH_JOBS = {}
 SEARCH_REQUEST_INDEX_ID = "search_request_index_id"
 
 class SearchRequest(object):
-    def __init__(self, user, need, sequence):
-        self.id = db_conn.incr(SEARCH_REQUEST_INDEX_ID)
+    def __init__(self, user, need, id=None):
+        if not id:
+            self.id = db_conn.incr(SEARCH_REQUEST_INDEX_ID)
+        else:
+            self.id = id
+
         self.need = need
         self.user = user
-        self.already_searched = []
+
+    def is_user_searched(self, user):
+        users_set = db_conn.smembers(self.users_set_key)
+        return user in users_set
+
+    def add_user_to_searched(self, user):
+        db_conn.sadd(self.users_set_key, user)
+
+    @property
+    def users_set_key(self):
+        return "kitten:search_request:%i:users" % self.id
+
+    @property
+    def key(self):
+        return "kitten:search_request:%i" % self.id
 
     @classmethod
-    def get(self, cls, id):
-        pass
+    def get(cls, id):
+        search_request_raw = db_conn.get("kitten:search_request:%i" % id)
+        if search_request_raw:
+            search_request = json.loads(search_request_raw)
+            search_request = cls(**search_request)
+            return search_request
+        else:
+            return None
 
-def register_search_request(connection, need):
-    search_request = SearchRequest(connection.user, need)
+    def save(self):
+        search_request = {'user': self.user, 'need': self.need}
+        db_conn.set(self.key, json.dumps(search_request))
+
+def search(connection, need, request_id=None, sequence=[]):
+    if request_id:
+        search_request = SearchRequest.get(request_id)
+    else:
+        search_request = SearchRequest(connection.user.id, need)
+        search_request.save()
+
     params = {'result': 'Ok', 'request_id': search_request.id}
     connection.response({'cmd': 'search', 'params': params})
     users = connection.user.get_fiends()
-    sequence = [connection.user.email]
+    sequence.append(connection.user.id)
     send_search_request(users, need, sequence, search_request)
 
 def send_search_request(users, sequence, search_request):
@@ -32,9 +66,9 @@ def send_search_request(users, sequence, search_request):
     '''
     for user in users:
         job_queue = KITTEN_SEARCH_JOBS.get(user)
-        if job_queue and user not in search_request.already_searched:
+        if job_queue and not search_request.is_user_searched(user):
             job_queue.put((search_request, sequence))
-            search_request.already_searched.append(user)
+            search_request.add_user_to_searched(user)
 
 def check_search_job(connection, job_queue):
     while 1:

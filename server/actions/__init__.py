@@ -3,7 +3,7 @@
 
 import sys
 import hashlib
-from searchlib import register_search_request
+from searchlib import search
 
 from users import User
 
