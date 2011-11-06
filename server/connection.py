@@ -5,6 +5,7 @@ from gevent.queue import Queue
 import gevent
 from gevent import monkey; monkey.patch_all()
 
+CONNECTIONS_POOL = {}
 
 class Connection(object):
     '''
@@ -29,6 +30,7 @@ class Connection(object):
         self.user = user
         this_job_queue = Queue()
         KITTEN_SEARCH_JOBS[user.id] = this_job_queue
+        CONNECTIONS_POOL[user.id] = self
         print "Kitten #%s init job queue" % user.id
         greenlet = gevent.spawn(check_search_job, self, this_job_queue)
         self.greenlets.append(greenlet)
@@ -37,3 +39,6 @@ class Connection(object):
         ''' Do here all close conection logic '''
         for greenlet in self.greenlets:
             gevent.kill(greenlet)
+        if self.user:
+            KITTEN_SEARCH_JOBS.pop(self.user.id)
+            CONNECTIONS_POOL.pop(self.user.id)

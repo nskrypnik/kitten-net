@@ -65,5 +65,9 @@ class User(object):
 
     def add_friend(self, email):
         user = User.load(email)
-        db_conn.sadd(self.friends_key, user.id)
+        if user:
+            db_conn.sadd(self.friends_key, user.id)
+            return True
+        else:
+            return False
 

@@ -46,16 +46,17 @@ class SearchRequest(object):
         search_request = {'user': self.user, 'need': self.need}
         db_conn.set(self.key, json.dumps(search_request))
 
-def search(connection, need, request_id=None, sequence=[]):
+def search(connection, need, request_id=None, sequence=None):
     if request_id:
         search_request = SearchRequest.get(request_id)
     else:
         search_request = SearchRequest(connection.user.id, need)
         search_request.save()
-
+    #import pdb; pdb.set_trace()
     params = {'result': 'Ok', 'request_id': search_request.id}
     connection.response({'cmd': 'search', 'params': params})
     users = connection.user.get_friends()
+    if not sequence: sequence = []
     sequence.append(connection.user.id)
     send_search_request(users, sequence, search_request)
 
@@ -74,3 +75,4 @@ def check_search_job(connection, job_queue):
         search_request, sequence = job_queue.get()
         params = {'need': search_request.need, 'request_id': search_request.id, 'sequence': sequence}
         connection.response({'cmd': 'find', 'params': params})
+        print "Send find request to kitten #%i" % connection.user.id

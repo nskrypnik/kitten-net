@@ -3,7 +3,8 @@
 
 import sys
 import hashlib
-from searchlib import search
+from searchlib import search, SearchRequest
+from connection import CONNECTIONS_POOL
 
 from users import User
 
@@ -68,5 +69,16 @@ def auth(connection, email, password=None, token=None):
         connection.response({'cmd': 'auth', 'params': params})
 
 @auth_required
+def found(connection, sequence, request_id, result):
+    search_request = SearchRequest.get(request_id)
+    requester_connection = CONNECTIONS_POOL.get(int(search_request.user))
+    params = {'result': result, 'request_id': request_id}
+    requester_connection.response({'cmd': 'found', 'params': params})
+
+@auth_required
 def add_friend(connection, email):
-    connection.user.add_friend(email)
+    if connection.user.add_friend(email):
+        result = 'Ok'
+    else: result = 'Fail'
+    msg = {'cmd': 'add_friend', 'params': {'result': result}}
+    connection.response(msg)
