@@ -1,16 +1,204 @@
 <html>
 	<head>
-      <script src="network.js"></script>
-      <script src="index.js"></script>
-      <script type="text/javascript">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<link rel="stylesheet" href="style.css" />
+		<script src="network.js"></script>
+		<script src="index.js"></script>
+		<script type="text/javascript">
 		window.addEventListener("load", main, false);
-      </script>
+		</script>
+		<script type="text/javascript" src="jquery-1.7.min.js"></script>
 	</head>
-	<body style="background-color:#1c1c1c;margin:0">
-		<div style="border-top:1px solid #404040">
-			<div style="color:#fff;;padding:10px">
-				Welcome to kitten
+	<body>
+		<div class="header">
+			<ul class="tabs">
+				<li id="items" class="selected">Мои вещи</li>
+				<li id="friends" class="">Мои друзья</li>
+				<li id="search" class="">Поиск</li>
+				<li id="settings" class="">Настройки</li>
+			</ul>
+		</div>
+		<div class="content">
+			<div class="main items">
+				<div class="item">
+					<div class="image">
+					</div>
+					<span class="title">
+						Название продукта $5.00
+					</span>
+					<div class="description">
+						Описание товара бла бла бла.
+					</div>
+				</div>
+				<div class="item">
+					<div class="image">
+					</div>
+					<span class="title">
+						Название продукта $5.00
+					</span>
+					<div class="description">
+						Описание товара бла бла бла.
+					</div>
+				</div>
+				<div class="item">
+					<div class="image">
+					</div>
+					<span class="title">
+						Название продукта $5.00
+					</span>
+					<div class="description">
+						Описание товара бла бла бла.
+					</div>
+				</div>
+			</div>
+			<div class="main friends">
+				Hello kittens friends
+			</div>
+			<div class="main search">
+				<form class="searchform">
+					<p>
+						<input class="textinput" type="text" value=""/>
+					</p>
+				</form>
+				<p>Друзья</p>
+				<div class="searchitems">
+					<div class="searchitem">
+						<div class="image">
+						</div>
+						<span class="title">
+							Название продукта $5.00
+						</span>
+						<div class="description">
+							Описание товара бла бла бла.
+						</div>
+					</div>
+					<div class="searchitem">
+						<div class="image">
+						</div>
+						<span class="title">
+							Название продукта $5.00
+						</span>
+						<div class="description">
+							Описание товара бла бла бла.
+						</div>
+					</div>
+					<div class="searchitem">
+						<div class="image">
+						</div>
+						<span class="title">
+							Название продукта $5.00
+						</span>
+						<div class="description">
+							Описание товара бла бла бла.
+						</div>
+					</div>
+				</div>
+				<p>Друзья друзей</p>
+				<div class="searchitems">
+					<div class="searchitem">
+						<div class="image">
+						</div>
+						<span class="title">
+							Название продукта $5.00
+						</span>
+						<div class="description">
+							Описание товара бла бла бла.
+						</div>
+					</div>
+					<div class="searchitem">
+						<div class="image">
+						</div>
+						<span class="title">
+							Название продукта $5.00
+						</span>
+						<div class="description">
+							Описание товара бла бла бла.
+						</div>
+					</div>
+					<div class="searchitem">
+						<div class="image">
+						</div>
+						<span class="title">
+							Название продукта $5.00
+						</span>
+						<div class="description">
+							Описание товара бла бла бла.
+						</div>
+					</div>
+				</div>
+				<p>В вашем городе</p>
+				<div class="searchitems">
+					<div class="searchitem">
+						<div class="image">
+						</div>
+						<span class="title">
+							Название продукта $5.00
+						</span>
+						<div class="description">
+							Описание товара бла бла бла.
+						</div>
+					</div>
+					<div class="searchitem">
+						<div class="image">
+						</div>
+						<span class="title">
+							Название продукта $5.00
+						</span>
+						<div class="description">
+							Описание товара бла бла бла.
+						</div>
+					</div>
+					<div class="searchitem">
+						<div class="image">
+						</div>
+						<span class="title">
+							Название продукта $5.00
+						</span>
+						<div class="description">
+							Описание товара бла бла бла.
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="main settings">
+				<form class="auth">
+					<p>
+						<label>E-mail</label>
+						<input type="text" value=""/>
+					</p>
+					<p>
+						<label>Пароль</label>
+						<input type="password" value=""/>
+					</p>
+					<p>
+						<label>Телефон</label>
+						<input type="text" value=""/>
+					</p>
+					<hr/>
+					<p>
+						<label>Страна</label>
+						<input type="text" value=""/>
+					</p>
+					<p>
+						<label>Город</label>
+						<input type="text" value=""/>
+					</p>
+				</form>
 			</div>
 		</div>
+		<script type="text/javascript">
+		$(function () {
+			var tabContainers = $('.main');
+			tabContainers.hide().filter(':first').show(); 
+			
+			$('ul.tabs li').click(function () {
+				tabContainers.hide(); 
+				tabContainers.filter('.' + $(this).attr('id')).show();
+				$('ul.tabs li').removeClass('selected'); 
+				$(this).addClass('selected'); 
+				return false;
+			}).filter(':first').click();
+		});
+		</script>
 	</body>
 </html>
