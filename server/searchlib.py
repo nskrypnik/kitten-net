@@ -2,7 +2,6 @@
 
 from db import db_conn
 import json
-from gevent.queue import Queue
 
 KITTEN_SEARCH_JOBS = {}
 
@@ -56,23 +55,25 @@ def search(connection, need, request_id=None, sequence=[]):
 
     params = {'result': 'Ok', 'request_id': search_request.id}
     connection.response({'cmd': 'search', 'params': params})
-    users = connection.user.get_fiends()
+    users = connection.user.get_friends()
     sequence.append(connection.user.id)
-    send_search_request(users, need, sequence, search_request)
+    send_search_request(users, sequence, search_request)
 
 def send_search_request(users, sequence, search_request):
     '''
         Sends requests
     '''
     for user in users:
-        job_queue = KITTEN_SEARCH_JOBS.get(user)
+        job_queue = KITTEN_SEARCH_JOBS.get(int(user))
         if job_queue and not search_request.is_user_searched(user):
             job_queue.put((search_request, sequence))
             search_request.add_user_to_searched(user)
 
 def check_search_job(connection, job_queue):
     while 1:
+        print "=========== i'm here ============"
         search_request, sequence = job_queue.get()
+        print 'I\'m unlocked'
         params = {'need': search_request.need, 'request_id': search_request.id, 'sequence': sequence}
         connection.response({'cmd': 'find', 'params': params})
 

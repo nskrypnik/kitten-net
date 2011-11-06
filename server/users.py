@@ -19,7 +19,7 @@ class User(object):
 
     @classmethod
     def create_new(cls, email, password):
-        user = User.load(email=email)
+        user = User.load(email)
         if user:
             return user
         else:
@@ -48,6 +48,10 @@ class User(object):
     def user_key(self):
         return "kitten:users:%s" % self.email
 
+    @property
+    def friends_key(self):
+        return "kitten:users:%s:friends" % self.email
+
     def save(self):
         serialized = {'email': self.email, 'password': self.password, 'id': self.id}
         db_conn.set(self.user_key, json.dumps(serialized))
@@ -55,4 +59,11 @@ class User(object):
     def update_token(self):
         token_hash = hashlib.md5("".join([self.email, str(datetime.now)]))
         self.token = token_hash.hexdigest()
+    
+    def get_friends(self):
+        return list(db_conn.smembers(self.friends_key))
+
+    def add_friend(self, email):
+        user = User.load(email)
+        db_conn.sadd(self.friends_key, user.id)
 

@@ -28,7 +28,7 @@ class Connection(object):
         this_job_queue = Queue()
         KITTEN_SEARCH_JOBS[user.id] = this_job_queue
         print "Kitten #%s init job queue" % user.id
-        greenlet = gevent.spawn(check_search_job, this_job_queue)
+        greenlet = gevent.spawn(check_search_job, self, this_job_queue)
         self.greenlets.append(greenlet)
 
     def close(self):

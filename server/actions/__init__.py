@@ -18,6 +18,8 @@ def auth_required(func):
             connection.response({'cmd': func.__name__, 'params': params})
     return gen
 
+search = auth_required(search)
+
 def handle_request(json_req, connection):
     ''' 
         This functions calls all functions form `cmd` parameter of json request
@@ -66,5 +68,5 @@ def auth(connection, email, password=None, token=None):
         connection.response({'cmd': 'auth', 'params': params})
 
 @auth_required
-def search(connection, need):
-    register_search_request(connection, need)
+def add_friend(connection, email):
+    connection.user.add_friend(email)
