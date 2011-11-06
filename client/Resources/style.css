@@ -36,6 +36,8 @@ body {
 	width: 100%;
 }
 
+
+/*Items*/
 .items, .friends, .settings {
 	display: none;
 }
@@ -44,8 +46,15 @@ body {
 	margin:10px;
 }
 
+/*Settings*/
+.settings .column{
+	width: 50%;
+	float: left;
+	text-align: center;
+}
+
 .settings form.auth{
-	margin:10px;
+	margin: 10px;
 }
 
 .settings form.auth .textinput {
@@ -53,13 +62,31 @@ body {
 	border: 1px solid #AAAAAA;
 	font: 12pt sans-serif;
 	padding: 6px;
-	width: 35%;
+	width: 100%;
 }
 
 .settings form.auth p{
 	padding:10px;
 }
 
+.settings .action {
+	border: 1px solid #CF5300;
+	background: none repeat scroll 0 0 #FF6600;
+	border-radius: 10px 10px 10px 10px;
+	box-shadow: 1px 1px 0 #FFFFFF;
+	color: #FFFFFF;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 1;
+	padding: 10px 22px;
+}
+
+.settings .action:active {
+	position: relative;
+	top: 1px
+}
+
+/*Search*/
 .search form.searchform p{
 	text-align: center;
 	padding:10px;
@@ -71,7 +98,6 @@ body {
 	padding: 6px;
 	width: 80%;
 }
-
 
 .search .searchitems {
 	padding:10px;
