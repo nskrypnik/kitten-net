@@ -58,21 +58,64 @@ body {
 	width: 100%;
 }
 
+.action {
+	border: 1px solid #CF5300;
+	background: none repeat scroll 0 0 #FF6600;
+	border-radius: 10px 10px 10px 10px;
+	box-shadow: 1px 1px 0 #FFFFFF;
+	color: #FFFFFF;
+	font-size: 12pt;
+	font-weight: bold;
+	line-height: 1;
+	padding: 10px 22px;
+	cursor: pointer;
+}
+
+.textinput {
+	border-radius: 10px 10px 10px 10px;
+	border: 1px solid #AAAAAA;
+	font: 12pt sans-serif;
+	padding: 6px;
+}
+
+textarea {
+	border: 1px solid #AAAAAA;
+	border-radius: 10px 10px 10px 10px;
+	font: 10pt sans-serif;
+	padding: 6px;
+}
 
 /*Items*/
-.items .item {
-	margin:10px;
-	padding:10px;
+.items .item, .items .newitem {
+	margin: 10px;
+	padding: 10px;
 }
 
 .items .image {
 	float:left;
-	padding: 0 20px 0 0; 
+	margin: 0 20px 0 0; 
 }
 
 .items .item .description {
 	color: #666666;
 	font-size: 10pt;
+}
+
+.items .newitem .image {
+	border: 1px dashed #AAAAAA;
+	border-radius: 10px 10px 10px 10px;
+	float: left;
+	height: 90px;
+	margin: 0 20px 0 0;
+	width: 90px;
+}
+
+.items .newitem p {
+	width: 1000px;
+}
+
+.items .newitem .action {
+	float: right;
 }
 
 /*Friends*/
@@ -83,7 +126,7 @@ body {
 
 .friends .image {
 	float:left;
-	padding: 0 20px 0 0; 
+	margin: 0 20px 0 0; 
 }
 
 .friends .item .contacts {
@@ -103,28 +146,11 @@ body {
 }
 
 .settings form.auth .textinput {
-	border-radius: 10px 10px 10px 10px;
-	border: 1px solid #AAAAAA;
-	font: 12pt sans-serif;
-	padding: 6px;
 	width: 100%;
 }
 
 .settings form.auth p{
 	padding:10px;
-}
-
-.settings .action {
-	border: 1px solid #CF5300;
-	background: none repeat scroll 0 0 #FF6600;
-	border-radius: 10px 10px 10px 10px;
-	box-shadow: 1px 1px 0 #FFFFFF;
-	color: #FFFFFF;
-	font-size: 12pt;
-	font-weight: bold;
-	line-height: 1;
-	padding: 10px 22px;
-	cursor: pointer;
 }
 
 .settings .action:active {
@@ -142,10 +168,6 @@ body {
 	padding:10px;
 }
 .search form.searchform .textinput {
-	border-radius: 10px 10px 10px 10px;
-	border: 1px solid #AAAAAA;
-	font: 12pt sans-serif;
-	padding: 6px;
 	width: 80%;
 }
 
@@ -156,7 +178,7 @@ body {
 
 .search .image {
 	float:left;
-	padding: 0 20px 0 0; 
+	margin: 0 20px 0 0; 
 }
 
 .search h3 {
