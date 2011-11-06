@@ -72,7 +72,7 @@ def auth(connection, email, password=None, token=None):
 def found(connection, sequence, request_id, result):
     search_request = SearchRequest.get(request_id)
     requester_connection = CONNECTIONS_POOL.get(int(search_request.user))
-    params = {'result': result, 'request_id': request_id}
+    params = {'result': result, 'request_id': request_id, 'sequence': sequence}
     requester_connection.response({'cmd': 'found', 'params': params})
 
 @auth_required

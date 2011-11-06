@@ -38,7 +38,8 @@ def kitten_test(num):
     gevent.sleep(num + 1)
     if num == 0:
         send_msg({'cmd': 'search', 'params': {'need': 'salo'}}, s)
-        gevent.sleep(4)
+        data = s.recv(1024)
+        print data
     else:
         data = s.recv(1024)
         print data, "from kitten #%i" % num
@@ -47,13 +48,17 @@ def kitten_test(num):
             params = data['params']
             send_msg({'cmd': 'search', 'params': {'request_id': params['request_id'], 
                 'sequence': params['sequence'], 'need': params['need']}}, s)
+            gevent.sleep(3)
         if num == 2:
             data = json.loads(data)
             request_id = data['params']['request_id']
+            sequence = data['params']['sequence']
             send_msg({'cmd': 'found', 'params': {
                                 'result': {'we': 'have'},
-                                'request_id': request_id
+                                'request_id': request_id,
+                                'sequence': sequence
                         }}, s)
+            gevent.sleep(2)
 
 
 tests = [gevent.spawn(kitten_test, num) for num in range(0, 3)]

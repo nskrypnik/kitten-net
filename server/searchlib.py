@@ -43,7 +43,7 @@ class SearchRequest(object):
             return None
 
     def save(self):
-        search_request = {'user': self.user, 'need': self.need}
+        search_request = {'user': self.user, 'need': self.need, 'id': self.id}
         db_conn.set(self.key, json.dumps(search_request))
 
 def search(connection, need, request_id=None, sequence=None):
@@ -52,7 +52,6 @@ def search(connection, need, request_id=None, sequence=None):
     else:
         search_request = SearchRequest(connection.user.id, need)
         search_request.save()
-    #import pdb; pdb.set_trace()
     params = {'result': 'Ok', 'request_id': search_request.id}
     connection.response({'cmd': 'search', 'params': params})
     users = connection.user.get_friends()
