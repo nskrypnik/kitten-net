@@ -163,19 +163,19 @@
 			<div class="main settings">
 				<form class="auth">
 					<p>
-						<input class="textinput" type="text" value="" placeholder="E-mail"/>
+						<input type="text" value="" placeholder="E-mail"/>
 					</p>
 					<p>
-						<input class="textinput" type="password" value="" placeholder="Пароль"/>
+						<input type="password" value="" placeholder="Пароль"/>
 					</p>
 					<p>
-						<input class="textinput" type="text" value="" placeholder="Телефон"/>
+						<input type="text" value="" placeholder="Телефон"/>
 					</p>
 					<p>
-						<input class="textinput" type="text" value="" placeholder="Страна"/>
+						<input type="text" value="" placeholder="Страна"/>
 					</p>
 					<p>
-						<input class="textinput" type="text" value="" placeholder="Город"/>
+						<input type="text" value="" placeholder="Город"/>
 					</p>
 				</form>
 			</div>
